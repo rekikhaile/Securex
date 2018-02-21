@@ -21,14 +21,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
         http
                 .authorizeRequests()
-                .antMatchers("/books/list").permitAll();
-          http
+                .antMatchers("/books/list").permitAll()
+       /*   http
                   .authorizeRequests()
                   .anyRequest()
-                  /*.antMatchers("/add")*/
+                  *//*.antMatchers("/add")*//*
                   .authenticated()
-                  .and()
-
+                  .and()*/
+                .anyRequest().authenticated()
+                .and()
                 .formLogin().failureUrl("/login?error")
                 .defaultSuccessUrl("/")
                 .loginPage("/login")
@@ -38,8 +39,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 .permitAll();
 
 
-      /*  http
-                .csrf().disable();*/
+       http
+                .csrf().disable();
+
+       http .headers()
+               .frameOptions()
+               .disable();
     }
 
     @Override
